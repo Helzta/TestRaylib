@@ -15,10 +15,6 @@ namespace TryRL
     }
     public class gameDesign
     {
-        static int nextDay = 0;
-        static bool gameDay = false;
-        static DateTime dtStart = new DateTime(2020, 6, 1);
-        static DateTime dtCurrent = dtStart.AddDays(nextDay);
         static List<gameDesign> structures = new List<gameDesign>(); 
         public bool up;
         public bool dwn;
@@ -29,9 +25,9 @@ namespace TryRL
         public float sW;
         public float sH;
         public string name;
-        public bool current;
+        public bool current {get; set;}
         public mainHubOpt mHO;
-        public gameDesign(bool up, bool dwn, bool scrlSide, int scrlAmnt, float sX, float sY, float sW, float sH, mainHubOpt mHO, string name, bool current = false)
+        public gameDesign(bool up, bool dwn, bool scrlSide, int scrlAmnt, float sX, float sY, float sW, float sH, mainHubOpt mHO, string name, bool current)
         {
             structures.Add(this);
             this.up = up;
@@ -46,9 +42,26 @@ namespace TryRL
             this.name = name;
             this.current = current;
         }
+        // Big box
+        /*Raylib.DrawRectangle((int)sX -10, (int) sY -10, (int) sW +20, (int) sH +20, Color.SKYBLUE);
+        Raylib.DrawRectangleLines((int)sX -10, (int) sY -10, (int) sW +20, (int) sH +20, Color.BLACK);
+        Raylib.DrawText(name, (int)sX, (int)sY, 50, Color.ORANGE);*/
+        
+        //Little box
+        /*Raylib.DrawRectangle((int)sX, (int) sY, (int) sW, (int) sH, Color.SKYBLUE);
+        Raylib.DrawRectangleLines((int)sX, (int) sY, (int) sW, (int) sH, Color.BLACK);
+        Raylib.DrawText(name, (int)sX + 15, (int)sY + 15, 30, Color.ORANGE);*/
+
+        // 2 scroll
+        /*Raylib.DrawCircle(((int)sW / 2) + (int) sX + (((int)sW / 6)), (int) sY + (int) sH - 30, 15, Color.BLUE);
+        Raylib.DrawCircle(((int)sW / 2) + (int) sX - (((int)sW / 6)), (int) sY + (int) sH - 30, 15, Color.BLUE);*/
+
+        // 3 scroll
+        /*Raylib.DrawCircle(((int)sW / 2) + (int) sX, (int) sY + (int) sH - 30, 15, Color.BLUE);
+        Raylib.DrawCircle(((int)sW / 2) + (int) sX - (((int)sW / 6)), (int) sY + (int) sH - 30, 15, Color.BLUE);
+        Raylib.DrawCircle(((int)sW / 2) + (int) sX + (((int)sW / 6)), (int) sY + (int) sH - 30, 15, Color.BLUE);*/
         public void drawGameHub()
         {
-            Raylib.ClearBackground(Color.DARKBLUE);
             if (current == true)
             {
                 Raylib.DrawRectangle((int)sX -10, (int) sY -10, (int) sW +20, (int) sH +20, Color.SKYBLUE);
@@ -61,22 +74,6 @@ namespace TryRL
                 Raylib.DrawRectangleLines((int)sX, (int) sY, (int) sW, (int) sH, Color.BLACK);
                 Raylib.DrawText(name, (int)sX + 15, (int)sY + 15, 30, Color.ORANGE);
             }
-            
-            if (scrlSide == true)
-            {
-                if (scrlAmnt == 2)
-                {
-                    Raylib.DrawCircle(((int)sW / 2) + (int) sX + (((int)sW / 6)), (int) sY + (int) sH - 30, 15, Color.BLUE);
-                    Raylib.DrawCircle(((int)sW / 2) + (int) sX - (((int)sW / 6)), (int) sY + (int) sH - 30, 15, Color.BLUE);
-                }
-                else if (scrlAmnt == 3)
-                {
-                    Raylib.DrawCircle(((int)sW / 2) + (int) sX, (int) sY + (int) sH - 30, 15, Color.BLUE);
-                    Raylib.DrawCircle(((int)sW / 2) + (int) sX - (((int)sW / 6)), (int) sY + (int) sH - 30, 15, Color.BLUE);
-                    Raylib.DrawCircle(((int)sW / 2) + (int) sX + (((int)sW / 6)), (int) sY + (int) sH - 30, 15, Color.BLUE);
-                }
-                else{}
-            }
         }
         public static void drawGameHubs()
         {
@@ -88,7 +85,7 @@ namespace TryRL
 
         public void updateGameHub()
         {
-            if (current == true && Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+            /*if (current == true && Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
             {
                 if (name == "Play Game")
                 {
@@ -129,7 +126,7 @@ namespace TryRL
                 {
                     playerMsg();
                 }
-            }
+            }*/
         }
 
         public static void updateGameHubs()
