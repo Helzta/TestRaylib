@@ -6,9 +6,9 @@ using System.IO;
 
 namespace TryRL
 {
-    public class gameDesign
+    public class HubDesign
     {
-        static List<gameDesign> designData = new List<gameDesign>();
+        static List<HubDesign> designData = new List<HubDesign>();
         public bool isHeader;
         public bool scrlLeft;
         public bool scrlMid;
@@ -21,7 +21,7 @@ namespace TryRL
         public string name;
         public bool current {get; set;}
         public bool isShowing;
-        public gameDesign(int sX, int sY, int sW, int sH, string name, bool scrlLeft = false, int scrlAmnt = 0, bool current = false, bool isHeader = false, bool isShowing = false, bool scrlMid = false, bool scrlRight = false)
+        public HubDesign(int sX, int sY, int sW, int sH, string name, bool scrlLeft = false, int scrlAmnt = 0, bool current = false, bool isHeader = false, bool isShowing = false, bool scrlMid = false, bool scrlRight = false)
         {
             designData.Add(this);
             this.scrlLeft = scrlLeft;
@@ -55,7 +55,7 @@ namespace TryRL
         // Raylib.DrawCircle((sW / 2) + sX, sY + sH - 30, 15, Color.BLUE);
         // Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
         // Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-        public void drawGameHub()
+        public void DrawGameHub()
         {
             if (current == true && isHeader == true)
             {
@@ -117,11 +117,11 @@ namespace TryRL
                 }
             }
         }
-        public static void drawGameHubs()
+        public static void DrawGameHubs()
         {
-            foreach (gameDesign gD in designData)
+            foreach (HubDesign gD in designData)
             {
-                gD.drawGameHub();
+                gD.DrawGameHub();
             }
         }
     }

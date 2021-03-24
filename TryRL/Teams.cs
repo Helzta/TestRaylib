@@ -8,6 +8,7 @@ namespace TryRL
         static List<Teams> teamData = new List<Teams>();
         public string name;
         public int division;
+        public int currentCap {get; set;}
         int playerCap = 25;
         public Teams(string name, int division)
         {

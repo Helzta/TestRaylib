@@ -22,44 +22,44 @@ namespace TryRL
             Raylib.InitWindow(1200,750, "");
             Raylib.SetTargetFPS(60);
  
-            gameDesign centralTab = new gameDesign(20, 70, 216, 50, "Central", false, 0, false, true);
-            gameDesign squadTab = new gameDesign(256, 70, 216, 50, "Squad", false, 0, false, true);
-            gameDesign transferTab = new gameDesign(492, 70, 216, 50, "Transfer", false, 0, false, true);
-            gameDesign officeTab = new gameDesign(718, 70, 216, 50, "Office", false, 0, false, true);
-            gameDesign myClubTab = new gameDesign(954, 70, 216, 50, "My Club", false, 0, false, true);
+            HubDesign centralTab = new HubDesign(20, 70, 216, 50, "Central", false, 0, false, true);
+            HubDesign squadTab = new HubDesign(256, 70, 216, 50, "Squad", false, 0, false, true);
+            HubDesign transferTab = new HubDesign(492, 70, 216, 50, "Transfer", false, 0, false, true);
+            HubDesign officeTab = new HubDesign(718, 70, 216, 50, "Office", false, 0, false, true);
+            HubDesign myClubTab = new HubDesign(954, 70, 216, 50, "My Club", false, 0, false, true);
             
-            gameDesign play = new gameDesign(20, 140, 540, 190, "Play Game");
-            gameDesign simulateDay = new gameDesign(20, 140, 540, 190, "Simulate Day", false, 0, true);
-            gameDesign news = new gameDesign(580, 140, 600, 340, "News", true, 3);
-            gameDesign cHubs = new gameDesign(20, 350, 260, 380, "Squad Hub", true, 2);
-            gameDesign league = new gameDesign(300, 350, 260, 380, "Table", true, 2);
-            gameDesign cTraining = new gameDesign(580, 500, 290, 230, "Training");
-            gameDesign cInbox = new gameDesign(890, 500, 290, 230, "Inbox", true, 2);
+            HubDesign play = new HubDesign(20, 140, 540, 190, "Play Game");
+            HubDesign simulateDay = new HubDesign(20, 140, 540, 190, "Simulate Day", false, 0, true);
+            HubDesign news = new HubDesign(580, 140, 600, 340, "News", true, 3);
+            HubDesign cHubs = new HubDesign(20, 350, 260, 380, "Squad Hub", true, 2);
+            HubDesign league = new HubDesign(300, 350, 260, 380, "Table", true, 2);
+            HubDesign cTraining = new HubDesign(580, 500, 290, 230, "Training");
+            HubDesign cInbox = new HubDesign(890, 500, 290, 230, "Inbox", true, 2);
 
-            gameDesign lineUp = new gameDesign(20, 140, 590, 590, "Rotational 7");
-            gameDesign training = new gameDesign(630, 530, 550, 200, "Training");
-            gameDesign squadHub = new gameDesign(630, 140, 265, 175, "Squad Hub");
-            gameDesign youthSquad = new gameDesign(915, 140, 265, 175, "Academy");
-            gameDesign teamSheet = new gameDesign(630, 335, 550, 175, "Team Rotation");
+            HubDesign lineUp = new HubDesign(20, 140, 590, 590, "Rotational 7");
+            HubDesign training = new HubDesign(630, 530, 550, 200, "Training");
+            HubDesign squadHub = new HubDesign(630, 140, 265, 175, "Squad Hub");
+            HubDesign youthSquad = new HubDesign(915, 140, 265, 175, "Academy");
+            HubDesign teamSheet = new HubDesign(630, 335, 550, 175, "Team Rotation");
 
-            gameDesign serachPlayer = new gameDesign(20, 140, 275, 285, "Search\n Players");
-            gameDesign transferHub = new gameDesign(315, 140, 275, 285, "Transfer\n Hub");
-            gameDesign transferHistory = new gameDesign(610, 140, 275, 285, "Transfer\n History");
-            gameDesign finances = new gameDesign(905, 140, 275, 285, "Financial");
-            gameDesign scouts = new gameDesign(905, 445, 275, 285, "Scout\n Network");
-            gameDesign recommended = new gameDesign(20, 445, 865, 285, "Scouted Players");
+            HubDesign serachPlayer = new HubDesign(20, 140, 275, 285, "Search\n Players");
+            HubDesign transferHub = new HubDesign(315, 140, 275, 285, "Transfer\n Hub");
+            HubDesign transferHistory = new HubDesign(610, 140, 275, 285, "Transfer\n History");
+            HubDesign finances = new HubDesign(905, 140, 275, 285, "Financial");
+            HubDesign scouts = new HubDesign(905, 445, 275, 285, "Scout\n Network");
+            HubDesign recommended = new HubDesign(20, 445, 865, 285, "Scouted Players");
 
-            gameDesign inbox = new gameDesign(20, 140, 570, 285, "Inbox");
-            gameDesign vision = new gameDesign(610, 140, 570, 285, "Vision and\n Expectations");
-            gameDesign contracts = new gameDesign(20, 445, 550, 285, "Player \n Contracts");
-            gameDesign manageStaff = new gameDesign(590, 445, 285, 285, "Staff");
-            gameDesign browseJobs = new gameDesign(895, 445, 285, 285, "Browse \n Jobs");
+            HubDesign inbox = new HubDesign(20, 140, 570, 285, "Inbox");
+            HubDesign vision = new HubDesign(610, 140, 570, 285, "Vision and\n Expectations");
+            HubDesign contracts = new HubDesign(20, 445, 550, 285, "Player \n Contracts");
+            HubDesign manageStaff = new HubDesign(590, 445, 285, 285, "Staff");
+            HubDesign browseJobs = new HubDesign(895, 445, 285, 285, "Browse \n Jobs");
 
-            gameDesign kits = new gameDesign(20, 140, 570,285, "Game Kits");
-            gameDesign arrangeFriendlies = new gameDesign(610, 140, 570, 285, "Arrange Friendly");
-            gameDesign trophies = new gameDesign(20, 445, 320, 285, "Club History");
-            gameDesign otherLeagues = new gameDesign(360, 445, 400, 285, "Other \n Leagues");
-            gameDesign top25 = new gameDesign(780, 445, 400, 285, "All Statistics");
+            HubDesign kits = new HubDesign(20, 140, 570,285, "Game Kits");
+            HubDesign arrangeFriendlies = new HubDesign(610, 140, 570, 285, "Arrange Friendly");
+            HubDesign trophies = new HubDesign(20, 445, 320, 285, "Club History");
+            HubDesign otherLeagues = new HubDesign(360, 445, 400, 285, "Other \n Leagues");
+            HubDesign top25 = new HubDesign(780, 445, 400, 285, "All Statistics");
             GameScreen screen = GameScreen.Central;
             while(!Raylib.WindowShouldClose())
             {
@@ -150,7 +150,7 @@ namespace TryRL
                 //         }
                 }
                 Raylib.BeginDrawing();
-                gameDesign.drawGameHubs();
+                HubDesign.DrawGameHubs();
                 if (screen != GameScreen.Central)
                 {
                     news.isShowing = false;
