@@ -13,6 +13,7 @@ namespace TryRL
             Squad,
             Office,
             MyClub,
+            Start
         }
         static public void PrintHubMenu()
         {
@@ -41,25 +42,24 @@ namespace TryRL
             gameDesign youthSquad = new gameDesign(915, 140, 265, 175, "Academy");
             gameDesign teamSheet = new gameDesign(630, 335, 550, 175, "Team Rotation");
 
-            gameDesign serachPlayer = new gameDesign(20, 140, 275, 285, "Search \nPlayers");
-            gameDesign transferHub = new gameDesign(315, 140, 275, 285, "Transfer \nHub");
-            gameDesign transferHistory = new gameDesign(610, 140, 275, 285, "Transfer \n History");
+            gameDesign serachPlayer = new gameDesign(20, 140, 275, 285, "Search\n Players");
+            gameDesign transferHub = new gameDesign(315, 140, 275, 285, "Transfer\n Hub");
+            gameDesign transferHistory = new gameDesign(610, 140, 275, 285, "Transfer\n History");
             gameDesign finances = new gameDesign(905, 140, 275, 285, "Financial");
-            gameDesign scouts = new gameDesign(905, 445, 275, 285, "Scout next \nGeneration");
+            gameDesign scouts = new gameDesign(905, 445, 275, 285, "Scout\n Network");
             gameDesign recommended = new gameDesign(20, 445, 865, 285, "Scouted Players");
 
             gameDesign inbox = new gameDesign(20, 140, 570, 285, "Inbox");
-            gameDesign vision = new gameDesign(610, 140, 570, 285, "Vision and Expectations");
-            gameDesign contracts = new gameDesign(20, 445, 550, 285, "Player \nContracts");
-            gameDesign manageStaff = new gameDesign(590, 445, 285, 285, "Staff \nManagement");
-            gameDesign browseJobs = new gameDesign(895, 445, 285, 285, "Browse Jobs");
+            gameDesign vision = new gameDesign(610, 140, 570, 285, "Vision and\n Expectations");
+            gameDesign contracts = new gameDesign(20, 445, 550, 285, "Player \n Contracts");
+            gameDesign manageStaff = new gameDesign(590, 445, 285, 285, "Staff");
+            gameDesign browseJobs = new gameDesign(895, 445, 285, 285, "Browse \n Jobs");
 
-            gameDesign kits = new gameDesign(20, 140, 570,285, "Game Kits", true, 3);
+            gameDesign kits = new gameDesign(20, 140, 570,285, "Game Kits");
             gameDesign arrangeFriendlies = new gameDesign(610, 140, 570, 285, "Arrange Friendly");
-            gameDesign trophies = new gameDesign(20, 445, 320, 285, "Club Trophies");
-            gameDesign otherLeagues = new gameDesign(360, 445, 400, 285, "Other \nLeagues");
+            gameDesign trophies = new gameDesign(20, 445, 320, 285, "Club History");
+            gameDesign otherLeagues = new gameDesign(360, 445, 400, 285, "Other \n Leagues");
             gameDesign top25 = new gameDesign(780, 445, 400, 285, "All Statistics");
-
             GameScreen screen = GameScreen.Central;
             while(!Raylib.WindowShouldClose())
             {
@@ -67,7 +67,6 @@ namespace TryRL
                 DateTime dtStart = new DateTime(2020, 6, 1);
                 DateTime dtCurrent = dtStart.AddDays(nextDay);
                 string dtString = dtCurrent.ToString("dd MMMM yyyy");
-                Font f1 = Raylib.LoadFont("resources/fonts/alagard.png");
                 {
                 // WASD buttons
                 // if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
@@ -150,6 +149,7 @@ namespace TryRL
                 //             }
                 //         }
                 }
+                Raylib.BeginDrawing();
                 gameDesign.drawGameHubs();
                 if (screen != GameScreen.Central)
                 {
@@ -186,7 +186,7 @@ namespace TryRL
                     manageStaff.isShowing = false;
                     browseJobs.isShowing = false;
                 }
-                if(screen != GameScreen.MyClub)
+                if (screen != GameScreen.MyClub)
                 {
                     kits.isShowing = false;
                     arrangeFriendlies.isShowing = false;
@@ -194,7 +194,6 @@ namespace TryRL
                     otherLeagues.isShowing = false;
                     top25.isShowing = false;
                 }
-                
                 if (screen == GameScreen.Central)
                 {
                     if (gameDay == false)
@@ -215,7 +214,7 @@ namespace TryRL
 
                     if(simulateDay.isShowing == true && simulateDay.current == false)
                     {
-                        Raylib.DrawTextEx(f1, dtString, new Vector2(simulateDay.sX + 15, simulateDay.sY + 45), 20, 2, Color.ORANGE);
+                        Raylib.DrawText(dtString, simulateDay.sX + 15, simulateDay.sY + 45, 20, Color.ORANGE);
                     }
                     if(simulateDay.current == true)
                     {
@@ -244,7 +243,7 @@ namespace TryRL
                             simulateDay.current = false;
                             news.current = true;
                         }
-                        Raylib.DrawTextEx(f1, dtString, new Vector2(simulateDay.sX , simulateDay.sY + 50), 30, 2, Color.ORANGE);
+                        Raylib.DrawText(dtString, simulateDay.sX, simulateDay.sY + 50, 30, Color.ORANGE);
                     }
                     else if(play.current == true)
                     {
@@ -1010,45 +1009,6 @@ namespace TryRL
                             kits.current = false;
                             arrangeFriendlies.current = true;
                         }
-                        else if (kits.scrlLeft == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                kits.scrlLeft = false;
-                                kits.scrlRight = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                kits.scrlLeft = false;
-                                kits.scrlMid = true;
-                            }
-                        }
-                        else if (kits.scrlMid == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                kits.scrlMid = false;
-                                kits.scrlLeft = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                kits.scrlMid = false;
-                                kits.scrlRight = true;
-                            }
-                        }
-                        else if (kits.scrlRight == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                kits.scrlRight = false;
-                                kits.scrlMid = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                kits.scrlRight = false;
-                                kits.scrlLeft = true;
-                            }
-                        }
                     }
                     else if(arrangeFriendlies.current == true)
                     {
@@ -1160,7 +1120,6 @@ namespace TryRL
                         }
                     }
                 }
-                Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.DARKBLUE);
                 Raylib.EndDrawing();
             }

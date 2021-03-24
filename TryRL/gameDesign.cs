@@ -8,7 +8,7 @@ namespace TryRL
 {
     public class gameDesign
     {
-        static List<gameDesign> structures = new List<gameDesign>();
+        static List<gameDesign> designData = new List<gameDesign>();
         public bool isHeader;
         public bool scrlLeft;
         public bool scrlMid;
@@ -23,7 +23,7 @@ namespace TryRL
         public bool isShowing;
         public gameDesign(int sX, int sY, int sW, int sH, string name, bool scrlLeft = false, int scrlAmnt = 0, bool current = false, bool isHeader = false, bool isShowing = false, bool scrlMid = false, bool scrlRight = false)
         {
-            structures.Add(this);
+            designData.Add(this);
             this.scrlLeft = scrlLeft;
             this.scrlMid = scrlMid;
             this.scrlRight = scrlRight;
@@ -57,31 +57,30 @@ namespace TryRL
         // Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
         public void drawGameHub()
         {
-            Font f1 = Raylib.LoadFont("resources/fonts/alagard.png");
             if (current == true && isHeader == true)
             {
                 Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
                 Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
-                Raylib.DrawTextEx(f1, name,new Vector2(sX + 5, sY + 10), 30, 2, Color.ORANGE);
+                Raylib.DrawText(name, sX + 5, sY + 10, 30, Color.ORANGE);
                 Raylib.DrawLineEx(new Vector2(sX + 5, sY + sH - 10), new Vector2(sX + sW - 5, sY + sH - 10), 5, Color.ORANGE);
             }
             else if(isHeader == true)
             {
                 Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
                 Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
-                Raylib.DrawTextEx(f1, name,new Vector2(sX + 5, sY + 10), 30, 2, Color.ORANGE);
+                Raylib.DrawText(name, sX + 5, sY + 10, 30, Color.ORANGE);
             }
             else if (current == true)
             {
                 Raylib.DrawRectangle(sX -10, sY -10, sW +20, sH +20, Color.SKYBLUE);
                 Raylib.DrawRectangleLines(sX -10, sY -10, sW +20, sH +20, Color.BLACK);
-                Raylib.DrawTextEx(f1, name,new Vector2(sX,sY), 50, 2, Color.ORANGE);
+                Raylib.DrawText(name, sX, sY, 50, Color.ORANGE);
             }
             else if(isShowing == true)
             {
                 Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
                 Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
-                Raylib.DrawTextEx(f1, name,new Vector2(sX + 15, sY + 15), 30, 2, Color.ORANGE);
+                Raylib.DrawText(name, sX + 15, sY + 15, 30, Color.ORANGE);
             }
             if (scrlRight == true && isShowing == true)
             {
@@ -120,7 +119,7 @@ namespace TryRL
         }
         public static void drawGameHubs()
         {
-            foreach (gameDesign gD in structures)
+            foreach (gameDesign gD in designData)
             {
                 gD.drawGameHub();
             }
