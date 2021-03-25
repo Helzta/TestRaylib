@@ -49,7 +49,7 @@ namespace TryRL
             HubDesign scouts = new HubDesign(905, 445, 275, 285, "Scout\n Network");
             HubDesign recommended = new HubDesign(20, 445, 865, 285, "Scouted Players");
 
-            HubDesign inbox = new HubDesign(20, 140, 570, 285, "Inbox");
+            HubDesign inbox = new HubDesign(20, 140, 570, 285, "Inbox", true, 2);
             HubDesign vision = new HubDesign(610, 140, 570, 285, "Vision and\n Expectations");
             HubDesign contracts = new HubDesign(20, 445, 550, 285, "Player \n Contracts");
             HubDesign manageStaff = new HubDesign(590, 445, 285, 285, "Staff");
@@ -874,6 +874,22 @@ namespace TryRL
                         {
                             inbox.current = false;
                             vision.current = true;
+                        }
+                        else if (inbox.scrlLeft == true)
+                        {
+                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
+                            {
+                                inbox.scrlLeft = false;
+                                inbox.scrlRight = true;
+                            }
+                        }
+                        else if (inbox.scrlRight == true)
+                        {
+                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
+                            {
+                                inbox.scrlRight = false;
+                                inbox.scrlLeft = true;
+                            }
                         }
                     }
                     else if (vision.current == true)

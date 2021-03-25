@@ -37,26 +37,28 @@ namespace TryRL
             this.isShowing = isShowing;
             this.isHeader = isHeader;
         }
-        // Big box
-        // Raylib.DrawRectangle(sX -10, sY -10, sW +20, sH +20, Color.SKYBLUE);
-        // Raylib.DrawRectangleLines(sX -10, sY -10, sW +20, sH +20, Color.BLACK);
-        // Raylib.DrawText(name, sX, sY, 50, Color.ORANGE);
-        
-        // Little box
-        // Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
-        // Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
-        // Raylib.DrawText(name, sX + 15, sY + 15, 30, Color.ORANGE);
-
-        // 2 scroll
-        // Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-        // Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-
-        // 3 scroll
-        // Raylib.DrawCircle((sW / 2) + sX, sY + sH - 30, 15, Color.BLUE);
-        // Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-        // Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
         public void DrawGameHub()
         {
+            {
+                // Big box
+                // Raylib.DrawRectangle(sX -10, sY -10, sW +20, sH +20, Color.SKYBLUE);
+                // Raylib.DrawRectangleLines(sX -10, sY -10, sW +20, sH +20, Color.BLACK);
+                // Raylib.DrawText(name, sX, sY, 50, Color.ORANGE);
+                
+                // Little box
+                // Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
+                // Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
+                // Raylib.DrawText(name, sX + 15, sY + 15, 30, Color.ORANGE);
+
+                // 2 scroll
+                // Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
+                // Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
+
+                // 3 scroll
+                // Raylib.DrawCircle((sW / 2) + sX, sY + sH - 30, 15, Color.BLUE);
+                // Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
+                // Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
+            }
             if (current == true && isHeader == true)
             {
                 Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
