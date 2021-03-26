@@ -2,7 +2,6 @@ using System;
 using Raylib_cs;
 using System.Collections.Generic;
 using System.Numerics;
-using System.IO;
 
 namespace TryRL
 {

@@ -8,12 +8,14 @@ namespace TryRL
     public class Player
     {
         static Random generator = new Random();
-        static public List<Player> Players = new List<Player>();
+        static public List<Player> playerData = new List<Player>();
         public string name;
         public string surname;
-        public int number;
         public string position;
-        //public string team = "";
+        //public string team {get; set;}
+        //public int number {get; set;}
+        //public int value {get; set;}
+        //public float performance {get; set;}
         public int age;
         public string arm;
         public int height;
@@ -29,7 +31,7 @@ namespace TryRL
         public int atkP;
         public int defP;
         public int vision;
-        public int coolness;
+        public int composure;
         public int passingStats;
         public int sett;
         public int uAPass;
@@ -47,18 +49,17 @@ namespace TryRL
         public int serve;
         public int direct;
         public int backrow;
-        public Player(string position, string name, string surname, int number, int age, string arm, int height, int weight,
+        public Player(string position, string name, string surname, int age, string arm, int height, int weight,
                       int defenseStats, int marking, int blocking, int reading, int dig, int reaction,
-                      int mentalityStats, int atkP, int defP, int timing, int coolness,
+                      int mentalityStats, int atkP, int defP, int timing, int composure,
                       int passingStats, int sett, int vision, int oAPass, int uAPass, int controll, 
                       int physicsStats, int stamina, int balance, int speed, int mobility, int elasticity,
                       int attackingStats, int power, int spike, int serve, int direct, int backrow)
         {
-            Players.Add(this);
+            playerData.Add(this);
             this.position = position;
             this.name = name;
             this.surname = surname;
-            this.number = number;
             this.age = age;
             this.arm = arm;
             this.height = height;
@@ -73,7 +74,7 @@ namespace TryRL
             this.atkP = atkP;
             this.defP = defP;
             this.timing = timing;
-            this.coolness = coolness;
+            this.composure = composure;
             this.passingStats = passingStats;
             this.sett = sett;
             this.vision = vision;
@@ -109,7 +110,6 @@ namespace TryRL
                 
                 name = firstNames[whatName];
                 surname = lastNames[whatLastname];
-                number = whatNumber;
                 age = whatAge;
                 weight = whatWeight;
                 if (whatArm == 1)
@@ -134,7 +134,7 @@ namespace TryRL
                     atkP = generator.Next(10,99);
                     defP = generator.Next(10,99);
                     vision = generator.Next(10,99);
-                    coolness = generator.Next(10,99);
+                    composure = generator.Next(10,99);
                     sett = generator.Next(10,99);
                     uAPass = generator.Next(10,99);
                     oAPass = generator.Next(10,99);
@@ -164,7 +164,7 @@ namespace TryRL
                     atkP = generator.Next(10,99);
                     defP = generator.Next(10,99);
                     vision = generator.Next(10,99);
-                    coolness = generator.Next(10,99);
+                    composure = generator.Next(10,99);
                     passingStats = generator.Next(10,99);
                     sett = generator.Next(10,99);
                     uAPass = generator.Next(10,99);
@@ -197,7 +197,7 @@ namespace TryRL
                     atkP = generator.Next(10,99);
                     defP = generator.Next(10,99);
                     vision = generator.Next(10,99);
-                    coolness = generator.Next(10,99);
+                    composure = generator.Next(10,99);
                     passingStats = generator.Next(10,99);
                     sett = generator.Next(10,99);
                     uAPass = generator.Next(10,99);
@@ -230,7 +230,7 @@ namespace TryRL
                     atkP = generator.Next(10,99);
                     defP = generator.Next(10,99);
                     vision = generator.Next(10,99);
-                    coolness = generator.Next(10,99);
+                    composure = generator.Next(10,99);
                     passingStats = generator.Next(10,99);
                     sett = generator.Next(10,99);
                     uAPass = generator.Next(10,99);
@@ -263,7 +263,7 @@ namespace TryRL
                     atkP = generator.Next(10,99);
                     defP = generator.Next(10,99);
                     vision = generator.Next(10,99);
-                    coolness = generator.Next(10,99);
+                    composure = generator.Next(10,99);
                     passingStats = generator.Next(10,99);
                     sett = generator.Next(10,99);
                     uAPass = generator.Next(10,99);
@@ -296,7 +296,7 @@ namespace TryRL
                     atkP = generator.Next(10,99);
                     defP = generator.Next(10,99);
                     vision = generator.Next(10,99);
-                    coolness = generator.Next(10,99);
+                    composure = generator.Next(10,99);
                     passingStats = generator.Next(10,99);
                     sett = generator.Next(10,99);
                     uAPass = generator.Next(10,99);
@@ -316,17 +316,18 @@ namespace TryRL
                     backrow = generator.Next(10,99);
                 }
                 defenseStats = (marking + blocking + reading + dig + reaction)/5;
-                mentalityStats = (timing + atkP + defP + coolness)/4;
+                mentalityStats = (timing + atkP + defP + composure)/4;
                 passingStats = (sett + uAPass + oAPass + controll + vision)/5;
                 physicStats = (stamina + balance + speed + mobility + elasticity)/5;
                 attackingStats = (power + spike + serve + direct + backrow)/5;
-                new Player(position, name, surname, number, age, arm, height, weight, defenseStats, marking, blocking, reading, dig, reaction, mentalityStats, atkP, defP, timing, coolness, passingStats, sett, vision, oAPass, uAPass, controll, physicStats, stamina, balance, speed, mobility, elasticity, attackingStats, power, spike, serve, direct, backrow);
+                new Player(position, name, surname, age, arm, height, weight, defenseStats, marking, blocking, reading, dig, reaction, mentalityStats, atkP, defP, timing, composure, passingStats, sett, vision, oAPass, uAPass, controll, physicStats, stamina, balance, speed, mobility, elasticity, attackingStats, power, spike, serve, direct, backrow);
             }
         }
         public static void initPlayers()
         {
-            Player oneAndOnly = new Player("Outside Hitter", "Kristoffer", "Chemnitz", 69, 18, "righ", 182, 80, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99);
+            Player oneAndOnly = new Player("Outside Hitter", "Kristoffer", "Chemnitz", 18, "righ", 182, 80, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99);
             oneAndOnly.CreateStartingPlayers();
+            Player.playerData.RemoveAt(0);
         }
 
         // Inte viktigt än
@@ -345,7 +346,7 @@ namespace TryRL
 
         // public static void DrawAll()
         // {
-        //     foreach (Player p in Players)
+        //     foreach (Player p in playerData)
         //         {
         //             p.Draw();                    
         //         }

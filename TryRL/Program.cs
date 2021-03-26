@@ -9,12 +9,9 @@ namespace TryRL
     {     
         static void Main(string[] args)
         {
-            bool gameOn = true;
             Player.initPlayers();
-            while(gameOn)
-            {
-                platform.PrintHubMenu();
-            }
+            Teams.initTeams();
+            platform.PrintHubMenu();
         }
     }
 }
