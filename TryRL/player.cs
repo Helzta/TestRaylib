@@ -1,5 +1,4 @@
 using System;
-using Raylib_cs;
 using System.Collections.Generic;
 using System.IO;
 
@@ -96,9 +95,10 @@ namespace TryRL
         }
         public void CreateStartingPlayers()
         {
+            playerData.RemoveAt(0);
             string[] firstNames = File.ReadAllLines(@"nameList");
             string[] lastNames = File.ReadAllLines(@"lastnameList");
-            for (int thisManyTimes = 1; thisManyTimes < 900; thisManyTimes++)
+            for (int thisManyTimes = 0; thisManyTimes < 900; thisManyTimes++)
             {
                 int whatRole = generator.Next(9);
                 int whatName = generator.Next(firstNames.Length);
@@ -323,11 +323,24 @@ namespace TryRL
                 new Player(position, name, surname, age, arm, height, weight, defenseStats, marking, blocking, reading, dig, reaction, mentalityStats, atkP, defP, timing, composure, passingStats, sett, vision, oAPass, uAPass, controll, physicStats, stamina, balance, speed, mobility, elasticity, attackingStats, power, spike, serve, direct, backrow);
             }
         }
-        public static void initPlayers()
+        public static void FirstPlayersIntoTheTeams()
         {
             Player oneAndOnly = new Player("Outside Hitter", "Kristoffer", "Chemnitz", 18, "righ", 182, 80, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99);
             oneAndOnly.CreateStartingPlayers();
-            Player.playerData.RemoveAt(0);
+            Teams secondAndDuo = new Teams("Karasuno", 125000000, 1, 0);
+            secondAndDuo.creatingTeams();
+            int whatPlayer;
+            for (int amntTeams = 0; amntTeams < Teams.teamData.ToArray().Length; amntTeams++)
+            {
+                for (int amntPlayers = 0; amntPlayers < 15; amntPlayers++)
+                {
+                    whatPlayer = generator.Next(Player.playerData.ToArray().Length);
+                    Teams.squad[amntTeams,amntPlayers] = Player.playerData.ToArray()[whatPlayer];
+                    Teams.teamData[amntTeams].currentPlayers++;
+                    Player.playerData.RemoveAt(whatPlayer);
+                    Console.WriteLine(Teams.squad[amntTeams,amntPlayers].name + " " + Teams.squad[amntTeams,amntPlayers].surname);
+                }
+            }
         }
 
         // Inte viktigt än

@@ -9,8 +9,7 @@ namespace TryRL
     {     
         static void Main(string[] args)
         {
-            Player.initPlayers();
-            Teams.initTeams();
+            Player.FirstPlayersIntoTheTeams();
             platform.PrintHubMenu();
         }
     }
