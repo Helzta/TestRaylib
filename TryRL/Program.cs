@@ -10,7 +10,7 @@ namespace TryRL
         static void Main(string[] args)
         {
             Player.FirstPlayersIntoTheTeams();
-            platform.PrintHubMenu();
+            Platform.PrintHubMenu();
         }
     }
 }

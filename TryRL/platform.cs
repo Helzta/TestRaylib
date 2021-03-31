@@ -1,10 +1,11 @@
 using System;
 using Raylib_cs;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace TryRL
 {
-    public class platform
+    public class Platform
     {
         public enum GameScreen 
         {
@@ -63,11 +64,19 @@ namespace TryRL
             GameScreen screen = GameScreen.Central;
             while(!Raylib.WindowShouldClose())
             {
-                
+                List<DateTime> Matchdays = new List<DateTime>();
+                Matchdays.Add(new DateTime(2020, 6, 5));
+                Matchdays.Add(new DateTime(2020, 6, 9));
+                Matchdays.Add(new DateTime(2020, 6, 12));
                 DateTime dtStart = new DateTime(2020, 6, 1);
                 DateTime dtCurrent = dtStart.AddDays(nextDay);
                 string dtString = dtCurrent.ToString("dd MMMM yyyy");
                 {
+                // static List<DateTime> SortAscending(List<DateTime> list)
+                // {
+                // list.Sort((a, b) => a.CompareTo(b));
+                // return list;
+                // }
                 // WASD buttons
                 // if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
                 //         {
@@ -149,8 +158,9 @@ namespace TryRL
                 //             }
                 //         }
                 }
-                Raylib.BeginDrawing();
+
                 HubDesign.DrawGameHubs();
+                Raylib.BeginDrawing();
                 if (screen != GameScreen.Central)
                 {
                     news.isShowing = false;
@@ -223,10 +233,6 @@ namespace TryRL
                             simulateDay.current = false;
                             centralTab.current = true;
                         }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
-                        {
-                            nextDay++;
-                        }
                         else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
                         {
                             simulateDay.current = false;
@@ -242,6 +248,19 @@ namespace TryRL
                         {
                             simulateDay.current = false;
                             news.current = true;
+                        }
+                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+                        {
+                            for (int currentGame = 0; currentGame < Matchdays.ToArray().Length; currentGame++)
+                            {
+                                if (DateTime.Equals(dtCurrent, Matchdays[currentGame].AddDays(-1)))
+                                {
+                                    gameDay = true;
+                                    simulateDay.current = false;
+                                    play.current = true;
+                                }   
+                            }
+                            nextDay++;
                         }
                         Raylib.DrawText(dtString, simulateDay.sX, simulateDay.sY + 50, 30, Color.ORANGE);
                     }
@@ -267,6 +286,12 @@ namespace TryRL
                         {
                             play.current = false;
                             news.current = true;
+                        }
+                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+                        {
+                            nextDay++;
+                            play.current = false;
+                            simulateDay.current = true;
                         }
                     }
                     else if(news.current == true)

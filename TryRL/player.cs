@@ -338,7 +338,7 @@ namespace TryRL
                     Teams.squad[amntTeams,amntPlayers] = Player.playerData.ToArray()[whatPlayer];
                     Teams.teamData[amntTeams].currentPlayers++;
                     Player.playerData.RemoveAt(whatPlayer);
-                    Console.WriteLine(Teams.squad[amntTeams,amntPlayers].name + " " + Teams.squad[amntTeams,amntPlayers].surname);
+                    // Console.WriteLine(Teams.squad[amntTeams,amntPlayers].name + " " + Teams.squad[amntTeams,amntPlayers].surname);
                 }
             }
         }
