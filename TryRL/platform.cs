@@ -7,1163 +7,402 @@ namespace TryRL
 {
     public class Platform
     {
-        public enum GameScreen 
+        static public void PrintHubMenu(HubDesign centralTab, HubDesign squadTab, HubDesign transferTab, HubDesign officeTab, HubDesign myClubTab, SimulateButton simulate, HubDesign news, HubDesign cHubs, HubDesign league, HubDesign cTraining, HubDesign cInbox, HubDesign lineUp, HubDesign squadHub, HubDesign youthSquad, HubDesign teamSheet, HubDesign training, HubDesign searchPlayer, HubDesign transferHub, HubDesign transferHistory, HubDesign finances, HubDesign recommended, HubDesign scouts, HubDesign inbox, HubDesign vision, HubDesign contracts, HubDesign manageStaff, HubDesign browseJobs, HubDesign kits, HubDesign arrangeFriendlies, HubDesign trophies, HubDesign otherLeagues, HubDesign top25)
         {
-            Central,
-            Transfer,
-            Squad,
-            Office,
-            MyClub,
-            Start
-        }
-        static public void PrintHubMenu()
-        {
-            int nextDay = 0;
-            bool gameDay = false;
-            Raylib.InitWindow(1200,750, "");
-            Raylib.SetTargetFPS(60);
- 
-            HubDesign centralTab = new HubDesign(20, 70, 216, 50, "Central", false, 0, false, true);
-            HubDesign squadTab = new HubDesign(256, 70, 216, 50, "Squad", false, 0, false, true);
-            HubDesign transferTab = new HubDesign(492, 70, 216, 50, "Transfer", false, 0, false, true);
-            HubDesign officeTab = new HubDesign(718, 70, 216, 50, "Office", false, 0, false, true);
-            HubDesign myClubTab = new HubDesign(954, 70, 216, 50, "My Club", false, 0, false, true);
-            
-            HubDesign play = new HubDesign(20, 140, 540, 190, "Play Game");
-            HubDesign simulateDay = new HubDesign(20, 140, 540, 190, "Simulate Day", false, 0, true);
-            HubDesign news = new HubDesign(580, 140, 600, 340, "News", true, 3);
-            HubDesign cHubs = new HubDesign(20, 350, 260, 380, "Squad Hub", true, 2);
-            HubDesign league = new HubDesign(300, 350, 260, 380, "Table", true, 2);
-            HubDesign cTraining = new HubDesign(580, 500, 290, 230, "Training");
-            HubDesign cInbox = new HubDesign(890, 500, 290, 230, "Inbox", true, 2);
-
-            HubDesign lineUp = new HubDesign(20, 140, 590, 590, "Rotational 7");
-            HubDesign training = new HubDesign(630, 530, 550, 200, "Training");
-            HubDesign squadHub = new HubDesign(630, 140, 265, 175, "Squad Hub");
-            HubDesign youthSquad = new HubDesign(915, 140, 265, 175, "Academy");
-            HubDesign teamSheet = new HubDesign(630, 335, 550, 175, "Team Rotation");
-
-            HubDesign serachPlayer = new HubDesign(20, 140, 275, 285, "Search\n Players");
-            HubDesign transferHub = new HubDesign(315, 140, 275, 285, "Transfer\n Hub");
-            HubDesign transferHistory = new HubDesign(610, 140, 275, 285, "Transfer\n History");
-            HubDesign finances = new HubDesign(905, 140, 275, 285, "Financial");
-            HubDesign scouts = new HubDesign(905, 445, 275, 285, "Scout\n Network");
-            HubDesign recommended = new HubDesign(20, 445, 865, 285, "Scouted Players");
-
-            HubDesign inbox = new HubDesign(20, 140, 570, 285, "Inbox", true, 2);
-            HubDesign vision = new HubDesign(610, 140, 570, 285, "Vision and\n Expectations");
-            HubDesign contracts = new HubDesign(20, 445, 550, 285, "Player \n Contracts");
-            HubDesign manageStaff = new HubDesign(590, 445, 285, 285, "Staff");
-            HubDesign browseJobs = new HubDesign(895, 445, 285, 285, "Browse \n Jobs");
-
-            HubDesign kits = new HubDesign(20, 140, 570,285, "Game Kits");
-            HubDesign arrangeFriendlies = new HubDesign(610, 140, 570, 285, "Arrange Friendly");
-            HubDesign trophies = new HubDesign(20, 445, 320, 285, "Club History");
-            HubDesign otherLeagues = new HubDesign(360, 445, 400, 285, "Other \n Leagues");
-            HubDesign top25 = new HubDesign(780, 445, 400, 285, "All Statistics");
-            GameScreen screen = GameScreen.Central;
-            while(!Raylib.WindowShouldClose())
+            // HubDesign centralTab = new HubDesign(20, 70, 216, 50, "Central", true);
+            centralTab.x = 20;
+            centralTab.y = 70;
+            centralTab.w = 216;
+            centralTab.h = 50;
+            centralTab.tag = "Central";
+            centralTab.header = true;
+            centralTab.toUp = centralTab;
+            centralTab.toRight = squadTab;
+            centralTab.toDown = simulate;
+            centralTab.toLeft = myClubTab;
+            centralTab.visable = new List<HubDesign>(){myClubTab, squadTab, transferTab, officeTab, simulate, news, cHubs, league, cTraining, cInbox};
+            centralTab.whatTab = new List<HubDesign>(){centralTab,};
+            // HubDesign squadTab = new HubDesign(256, 70, 216, 50, "Squad", true);
+            squadTab.x = 256;
+            squadTab.y = 70;
+            squadTab.w = 216;
+            squadTab.h = 50;
+            squadTab.tag = "Squad";
+            squadTab.header = true;
+            squadTab.toUp = squadTab;
+            squadTab.toRight = transferTab;
+            squadTab.toDown = lineUp;
+            squadTab.toLeft = centralTab;
+            squadTab.visable = new List<HubDesign>(){centralTab, transferTab, officeTab, myClubTab, lineUp, youthSquad, squadHub, training, teamSheet};
+            squadTab.whatTab = new List<HubDesign>(){squadTab};
+            // HubDesign transferTab = new HubDesign(492, 70, 216, 50, "Transfer", true);
+            transferTab.x = 492;
+            transferTab.y = 70;
+            transferTab.w = 216;
+            transferTab.h = 50;
+            transferTab.tag = "Transfer";
+            transferTab.header = true;
+            transferTab.toUp = transferTab;
+            transferTab.toRight = officeTab;
+            transferTab.toDown = searchPlayer;
+            transferTab.toLeft = squadTab;
+            transferTab.visable = new List<HubDesign>(){squadTab, officeTab, centralTab, myClubTab, transferHistory, transferHub, searchPlayer, scouts, recommended, finances};
+            transferTab.whatTab = new List<HubDesign>(){transferTab};
+            // HubDesign officeTab = new HubDesign(728, 70, 216, 50, "Office", true);
+            officeTab.x = 728;
+            officeTab.y = 70;
+            officeTab.w = 216;
+            officeTab.h = 50;
+            officeTab.tag = "Office";
+            officeTab.header = true;
+            officeTab.toUp = officeTab;
+            officeTab.toRight = myClubTab;
+            officeTab.toDown = inbox;
+            officeTab.toLeft = transferTab;
+            officeTab.visable = new List<HubDesign>(){transferTab, myClubTab, centralTab, squadTab, vision, inbox, manageStaff, contracts, browseJobs};
+            officeTab.whatTab = new List<HubDesign>(){officeTab};
+            // HubDesign myClubTab = new HubDesign(964, 70, 216, 50, "My Club", true);
+            myClubTab.x = 964;
+            myClubTab.y = 70;
+            myClubTab.w = 216;
+            myClubTab.h = 50;
+            myClubTab.tag = "My Club";
+            myClubTab.header = true;
+            myClubTab.toUp = myClubTab;
+            myClubTab.toRight = centralTab;
+            myClubTab.toDown = kits;
+            myClubTab.toLeft = officeTab;
+            myClubTab.visable = new List<HubDesign>(){officeTab, centralTab, squadTab, transferTab, kits, arrangeFriendlies, trophies, otherLeagues, top25};
+            myClubTab.whatTab = new List<HubDesign>(){myClubTab};
+            // HubDesign simulate = new HubDesign(20, 140, 540, 190, "Simulate");
+            simulate.x = 20;
+            simulate.y = 140;
+            simulate.w = 540;
+            simulate.h = 190;
+            simulate.tag = "Simulate";
+            simulate.toUp = centralTab;
+            simulate.toRight = news;
+            simulate.toDown = cHubs;
+            simulate.toLeft = arrangeFriendlies;
+            simulate.visable = new List<HubDesign>(){myClubTab, squadTab, transferTab, officeTab, news, cHubs, league, cTraining, cInbox};
+            simulate.whatTab = new List<HubDesign>(){centralTab};
+            simulate.nextDay = 0;
+            simulate.action = ()  =>
             {
-                List<DateTime> Matchdays = new List<DateTime>();
-                Matchdays.Add(new DateTime(2020, 6, 5));
-                Matchdays.Add(new DateTime(2020, 6, 9));
-                Matchdays.Add(new DateTime(2020, 6, 12));
-                DateTime dtStart = new DateTime(2020, 6, 1);
-                DateTime dtCurrent = dtStart.AddDays(nextDay);
-                string dtString = dtCurrent.ToString("dd MMMM yyyy");
-                {
-                // static List<DateTime> SortAscending(List<DateTime> list)
-                // {
-                // list.Sort((a, b) => a.CompareTo(b));
-                // return list;
-                // }
-                // WASD buttons
-                // if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                //         {
-                //             .current = false;
-                //             .current = true;
-                //         }
-                //         else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                //         {
-                //             .current = false;
-                //             .current = true;
-                //         }
-                //         else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                //         {
-                //             .current = false;
-                //             .current = true;
-                //         }
-                //         else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                //         {
-                //             .current = false;
-                //             .current = true;
-                //         }
-
-                // 3 SCRLAMNT
-                // else if (.scrlLeft == true)
-                //         {
-                //             if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                //             {
-                //                 .scrlLeft = false;
-                //                 .scrlRight = true;
-                //             }
-                //             else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                //             {
-                //                 .scrlLeft = false;
-                //                 .scrlMid = true;
-                //             }
-                //         }
-                //         else if (.scrlMid == true)
-                //         {
-                //             if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                //             {
-                //                 .scrlMid = false;
-                //                 .scrlLeft = true;
-                //             }
-                //             else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                //             {
-                //                 .scrlMid = false;
-                //                 .scrlRight = true;
-                //             }
-                //         }
-                //         else if (.scrlRight == true)
-                //         {
-                //             if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                //             {
-                //                 .scrlRight = false;
-                //                 .scrlMid = true;
-                //             }
-                //             else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                //             {
-                //                 .scrlRight = false;
-                //                 .scrlLeft = true;
-                //             }
-                //         }
-
-                // 2 SCRLAMNT
-                // else if (.scrlLeft == true)
-                //         {
-                //             if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                //             {
-                //                 .scrlLeft = false;
-                //                 .scrlRight = true;
-                //             }
-                //         }
-                //         else if (.scrlRight == true)
-                //         {
-                //             if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                //             {
-                //                 .scrlRight = false;
-                //                 .scrlLeft = true;
-                //             }
-                //         }
-                }
-
-                HubDesign.DrawGameHubs();
-                Raylib.BeginDrawing();
-                if (screen != GameScreen.Central)
-                {
-                    news.isShowing = false;
-                    cHubs.isShowing = false;
-                    league.isShowing = false;
-                    cTraining.isShowing = false;
-                    cInbox.isShowing = false;
-                    simulateDay.isShowing = false;
-                    play.isShowing = false;
-                }
-                if (screen != GameScreen.Squad)
-                {
-                    lineUp.isShowing = false;
-                    training.isShowing = false;
-                    squadHub.isShowing = false;
-                    youthSquad.isShowing = false;
-                    teamSheet.isShowing = false;
-                }
-                if (screen != GameScreen.Transfer)
-                {
-                    recommended.isShowing = false;
-                    finances.isShowing = false;
-                    serachPlayer.isShowing = false;
-                    scouts.isShowing = false;
-                    transferHistory.isShowing = false;
-                    transferHub.isShowing = false;
-                }
-                if (screen != GameScreen.Office)
-                {
-                    inbox.isShowing = false;
-                    vision.isShowing = false;
-                    contracts.isShowing = false;
-                    manageStaff.isShowing = false;
-                    browseJobs.isShowing = false;
-                }
-                if (screen != GameScreen.MyClub)
-                {
-                    kits.isShowing = false;
-                    arrangeFriendlies.isShowing = false;
-                    trophies.isShowing = false;
-                    otherLeagues.isShowing = false;
-                    top25.isShowing = false;
-                }
-                if (screen == GameScreen.Central)
-                {
-                    if (gameDay == false)
-                    {
-                        simulateDay.isShowing = true;
-                        play.isShowing = false;
-                    }
-                    else
-                    {
-                        simulateDay.isShowing = false;
-                        play.isShowing = true;
-                    }
-                    news.isShowing = true;
-                    cHubs.isShowing = true;
-                    league.isShowing = true;
-                    cTraining.isShowing = true;
-                    cInbox.isShowing = true;
-
-                    if(simulateDay.isShowing == true && simulateDay.current == false)
-                    {
-                        Raylib.DrawText(dtString, simulateDay.sX + 15, simulateDay.sY + 45, 20, Color.ORANGE);
-                    }
-                    if(simulateDay.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            simulateDay.current = false;
-                            centralTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            simulateDay.current = false;
-                            arrangeFriendlies.current = true;
-                            screen = GameScreen.MyClub;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            simulateDay.current = false;
-                            cHubs.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            simulateDay.current = false;
-                            news.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
-                        {
-                            for (int currentGame = 0; currentGame < Matchdays.ToArray().Length; currentGame++)
-                            {
-                                if (DateTime.Equals(dtCurrent, Matchdays[currentGame].AddDays(-1)))
-                                {
-                                    gameDay = true;
-                                    simulateDay.current = false;
-                                    play.current = true;
-                                }   
-                            }
-                            nextDay++;
-                        }
-                        Raylib.DrawText(dtString, simulateDay.sX, simulateDay.sY + 50, 30, Color.ORANGE);
-                    }
-                    else if(play.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            play.current = false;
-                            centralTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            play.current = false;
-                            arrangeFriendlies.current = true;
-                            screen = GameScreen.MyClub;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            play.current = false;
-                            cHubs.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            play.current = false;
-                            news.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
-                        {
-                            nextDay++;
-                            play.current = false;
-                            simulateDay.current = true;
-                        }
-                    }
-                    else if(news.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            news.current = false;
-                            centralTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            news.current = false;
-                            if (gameDay == false)
-                            {
-                                simulateDay.current = true;
-                            }
-                            else
-                            {
-                                play.current = true;
-                            }
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            news.current = false;
-                            cTraining.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            news.current = false;
-                            lineUp.current = true;
-                            screen = GameScreen.Squad;
-                        }
-                        else if (news.scrlLeft == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                news.scrlLeft = false;
-                                news.scrlRight = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                news.scrlLeft = false;
-                                news.scrlMid = true;
-                            }
-                        }
-                        else if (news.scrlMid == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                news.scrlMid = false;
-                                news.scrlLeft = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                news.scrlMid = false;
-                                news.scrlRight = true;
-                            }
-                        }
-                        else if (news.scrlRight == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                news.scrlRight = false;
-                                news.scrlMid = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                news.scrlRight = false;
-                                news.scrlLeft = true;
-                            }
-                        }
-                    }
-                    else if(cHubs.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            cHubs.current = false;
-                            if (gameDay == false)
-                            {
-                                simulateDay.current = true;
-                            }
-                            else
-                            {
-                                play.current = true;
-                            }
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            cHubs.current = false;
-                            top25.current = true;
-                            screen = GameScreen.MyClub;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            cHubs.current = false;
-                            league.current = true;
-                        }
-                        else if (cHubs.scrlLeft == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                cHubs.scrlLeft = false;
-                                cHubs.scrlRight = true;
-                            }
-                        }
-                        else if (cHubs.scrlRight == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                cHubs.scrlRight = false;
-                                cHubs.scrlLeft = true;
-                            }
-                        }
-                    }
-                    else if(league.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            league.current = false;
-                            if (gameDay == false)
-                            {
-                                simulateDay.current = true;
-                            }
-                            else
-                            {
-                                play.current = true;
-                            }
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            league.current = false;
-                            cHubs.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            league.current = false;
-                            cTraining.current = true;
-                        }
-                        else if (league.scrlLeft == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                league.scrlLeft = false;
-                                league.scrlRight = true;
-                            }
-                        }
-                        else if (league.scrlRight == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                league.scrlRight = false;
-                                league.scrlLeft = true;
-                            }
-                        }
-                    }
-                    else if(cTraining.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            cTraining.current = false;
-                            news.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            cTraining.current = false;
-                            league.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            cTraining.current = false;
-                            cInbox.current = true;
-                        }
-                        else if (cTraining.scrlLeft == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                cTraining.scrlLeft = false;
-                                cTraining.scrlRight = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                cTraining.scrlLeft = false;
-                                cTraining.scrlMid = true;
-                            }
-                        }
-                        else if (cTraining.scrlMid == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                cTraining.scrlMid = false;
-                                cTraining.scrlLeft = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                cTraining.scrlMid = false;
-                                cTraining.scrlRight = true;
-                            }
-                        }
-                        else if (cTraining.scrlRight == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT))
-                            {
-                                cTraining.scrlRight = false;
-                                cTraining.scrlMid = true;
-                            }
-                            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                cTraining.scrlRight = false;
-                                cTraining.scrlLeft = true;
-                            }
-                        }
-                    }
-                    else if(cInbox.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            cInbox.current = false;
-                            news.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            cInbox.current = false;
-                            cTraining.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            cInbox.current = false;
-                            lineUp.current = true;
-                            screen = GameScreen.Squad;
-                        }
-                        else if (cInbox.scrlLeft == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                cInbox.scrlLeft = false;
-                                cInbox.scrlRight = true;
-                            }
-                        }
-                        else if (cInbox.scrlRight == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                cInbox.scrlRight = false;
-                                cInbox.scrlLeft = true;
-                            }
-                        }
-                    }
-                    else if(centralTab.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            centralTab.current = false;
-                            myClubTab.current = true;
-                            screen = GameScreen.MyClub;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            centralTab.current = false;
-                            if (gameDay == false)
-                            {
-                                simulateDay.current = true;
-                            }
-                            else
-                            {
-                                play.current = true;
-                            }                            
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            centralTab.current = false;
-                            squadTab.current = true;
-                            screen = GameScreen.Squad;
-                        }
-                    }
-                }
-                else if (screen == GameScreen.Squad)
-                {
-                    lineUp.isShowing = true;
-                    squadHub.isShowing = true;
-                    youthSquad.isShowing = true;
-                    teamSheet.isShowing = true;
-                    training.isShowing = true;
-                    
-                    if(lineUp.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            lineUp.current = false;
-                            squadTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            lineUp.current = false;
-                            news.current = true;
-                            screen = GameScreen.Central;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            lineUp.current = false;
-                            squadHub.current = true;
-                        }
-
-                    }
-                    else if(squadHub.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            squadHub.current = false;
-                            squadTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            squadHub.current = false;
-                            lineUp.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            squadHub.current = false;
-                            teamSheet.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            squadHub.current = false;
-                            youthSquad.current = true;
-                        }
-                    }
-                    else if(youthSquad.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            youthSquad.current = false;
-                            squadTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            youthSquad.current = false;
-                            squadHub.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            youthSquad.current = false;
-                            teamSheet.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            youthSquad.current = false;
-                            serachPlayer.current = true;
-                            screen = GameScreen.Transfer;
-                        }
-                    }
-                    else if(teamSheet.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            teamSheet.current = false;
-                            squadHub.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            teamSheet.current = false;
-                            lineUp.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            teamSheet.current = false;
-                            training.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            teamSheet.current = false;
-                            serachPlayer.current = true;
-                            screen = GameScreen.Transfer;
-                        }
-                    }
-                    else if(training.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            training.current = false;
-                            teamSheet.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            training.current = false;
-                            lineUp.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            training.current = false;
-                            recommended.current = true;
-                            screen = GameScreen.Transfer;
-                        }
-                    }
-                    else if(squadTab.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            squadTab.current = false;
-                            centralTab.current = true;
-                            screen = GameScreen.Central;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            squadTab.current = false;
-                            lineUp.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            squadTab.current = false;
-                            transferTab.current = true;
-                            screen = GameScreen.Transfer;
-
-                        }
-                    }
-                }
-                else if (screen == GameScreen.Transfer)
-                {
-                    serachPlayer.isShowing = true;
-                    transferHub.isShowing = true;
-                    transferHistory.isShowing = true;
-                    finances.isShowing = true;
-                    recommended.isShowing = true;
-                    scouts.isShowing = true;
-
-                    if(serachPlayer.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            serachPlayer.current = false;
-                            transferTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            serachPlayer.current = false;
-                            youthSquad.current = true;
-                            screen = GameScreen.Squad;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            serachPlayer.current = false;
-                            recommended.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            serachPlayer.current = false;
-                            transferHub.current = true;
-                        }
-                    }
-                    else if(transferHub.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            transferHub.current = false;
-                            transferTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            transferHub.current = false;
-                            serachPlayer.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            transferHub.current = false;
-                            recommended.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            transferHub.current = false;
-                            transferHistory.current = true;
-                        }
-                    }
-                    else if(transferHistory.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            transferHistory.current = false;
-                            transferTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            transferHistory.current = false;
-                            transferHub.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            transferHistory.current = false;
-                            recommended.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            transferHistory.current = false;
-                            finances.current = true;
-                        }
-                    }
-                    else if(finances.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            finances.current = false;
-                            transferTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            finances.current = false;
-                            transferHistory.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            finances.current = false;
-                            scouts.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            finances.current = false;
-                            inbox.current = true;
-                            screen = GameScreen.Office;
-                        }
-                    }
-                    else if(recommended.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            recommended.current = false;
-                            serachPlayer.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            recommended.current = false;
-                            training.current = true;
-                            screen = GameScreen.Squad;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            recommended.current = false;
-                            scouts.current = true;
-                        }
-                    }
-                    else if(scouts.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            scouts.current = false;
-                            finances.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            scouts.current = false;
-                            recommended.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            scouts.current = false;
-                            contracts.current = true;
-                            screen = GameScreen.Office;
-                        }
-                    }
-                    else if(transferTab.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            transferTab.current = false;
-                            squadTab.current = true;
-                            screen = GameScreen.Squad;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            transferTab.current = false;
-                            serachPlayer.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            transferTab.current = false;
-                            officeTab.current = true;
-                            screen = GameScreen.Office;
-                        }
-                    }
-                }
-                else if (screen == GameScreen.Office)
-                {
-                    inbox.isShowing = true;
-                    vision.isShowing = true;
-                    contracts.isShowing = true;
-                    manageStaff.isShowing = true;
-                    browseJobs.isShowing = true;
-                    
-                    if(inbox.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            inbox.current = false;
-                            officeTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            inbox.current = false;
-                            finances.current = true;
-                            screen = GameScreen.Transfer;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            inbox.current = false;
-                            contracts.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            inbox.current = false;
-                            vision.current = true;
-                        }
-                        else if (inbox.scrlLeft == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                inbox.scrlLeft = false;
-                                inbox.scrlRight = true;
-                            }
-                        }
-                        else if (inbox.scrlRight == true)
-                        {
-                            if(Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) || Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT))
-                            {
-                                inbox.scrlRight = false;
-                                inbox.scrlLeft = true;
-                            }
-                        }
-                    }
-                    else if (vision.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            vision.current = false;
-                            officeTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            vision.current = false;
-                            inbox.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            vision.current = false;
-                            manageStaff.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            vision.current = false;
-                            kits.current = true;
-                            screen = GameScreen.MyClub;
-                        }
-                    }
-                    else if (contracts.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            contracts.current = false;
-                            inbox.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            contracts.current = false;
-                            scouts.current = true;
-                            screen = GameScreen.Transfer;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            contracts.current = false;
-                            manageStaff.current = true;
-                        }
-                    }
-                    else if (manageStaff.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            manageStaff.current = false;
-                            inbox.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            manageStaff.current = false;
-                            contracts.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            manageStaff.current = false;
-                            browseJobs.current = true;
-                        }
-                    }
-                    else if (browseJobs.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            browseJobs.current = false;
-                            vision.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            browseJobs.current = false;
-                            manageStaff.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            browseJobs.current = false;
-                            trophies.current = true;
-                            screen = GameScreen.MyClub;
-                        }
-
-                    }
-                    else if (officeTab.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            officeTab.current = false;
-                            transferTab.current = true;
-                            screen = GameScreen.Transfer;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            officeTab.current = false;
-                            inbox.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            officeTab.current = false;
-                            myClubTab.current = true;
-                            screen = GameScreen.MyClub;
-                        }
-                    }
-                }
-                else if (screen == GameScreen.MyClub)
-                {
-                    kits.isShowing = true;
-                    arrangeFriendlies.isShowing = true;
-                    trophies.isShowing = true;
-                    otherLeagues.isShowing = true;
-                    top25.isShowing = true;
-                    
-                    if(kits.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            kits.current = false;
-                            myClubTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            kits.current = false;
-                            vision.current = true;
-                            screen = GameScreen.Office;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            kits.current = false;
-                            trophies.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            kits.current = false;
-                            arrangeFriendlies.current = true;
-                        }
-                    }
-                    else if(arrangeFriendlies.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            arrangeFriendlies.current = false;
-                            myClubTab.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            arrangeFriendlies.current = false;
-                            kits.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            arrangeFriendlies.current = false;
-                            top25.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            arrangeFriendlies.current = false;
-                            if (gameDay == false)
-                            {
-                                simulateDay.current = true;
-                                play.current = false;
-                            }
-                            else
-                            {
-                                simulateDay.current = false;
-                                play.current = true;
-                            }
-                            screen = GameScreen.Central;
-                        }
-                    }
-                    else if(trophies.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            trophies.current = false;
-                            kits.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            trophies.current = false;
-                            browseJobs.current = true;
-                            screen = GameScreen.Office;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            trophies.current = false;
-                            otherLeagues.current = true;
-                        }
-                    }
-                    else if(otherLeagues.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            otherLeagues.current = false;
-                            kits.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            otherLeagues.current = false;
-                            trophies.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            otherLeagues.current = false;
-                            top25.current = true;
-                        }
-                    }
-                    else if(top25.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_W))
-                        {
-                            top25.current = false;
-                            arrangeFriendlies.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            top25.current = false;
-                            otherLeagues.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            top25.current = false;
-                            cHubs.current = true;
-                            screen = GameScreen.Central;
-                        }
-                    }
-                    else if(myClubTab.current == true)
-                    {
-                        if(Raylib.IsKeyPressed(KeyboardKey.KEY_A))
-                        {
-                            myClubTab.current = false;
-                            officeTab.current = true;
-                            screen = GameScreen.Office;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_S))
-                        {
-                            myClubTab.current = false;
-                            kits.current = true;
-                        }
-                        else if(Raylib.IsKeyPressed(KeyboardKey.KEY_D))
-                        {
-                            myClubTab.current = false;
-                            centralTab.current = true;
-                            screen = GameScreen.Central;
-                        }
-                    }
-                }
-                Raylib.ClearBackground(Color.DARKBLUE);
-                Raylib.EndDrawing();
-            }
+                simulate.CheckDate();
+            };
+            // HubDesign news = new HubDesign(580, 140, 600, 340, "News");
+            news.x = 580;
+            news.y = 140;
+            news.w = 600;
+            news.h = 340;
+            news.tag = "News";
+            news.toUp = centralTab;
+            news.toRight = lineUp;
+            news.toDown = cTraining;
+            news.toLeft = simulate;
+            news.visable = new List<HubDesign>(){myClubTab, squadTab, transferTab, officeTab, simulate, cHubs, league, cTraining, cInbox};
+            news.whatTab = new List<HubDesign>(){centralTab};
+            // HubDesign cHubs = new HubDesign(20, 350, 260, 380, "Squad Hub");
+            cHubs.x = 20;
+            cHubs.y = 350;
+            cHubs.w = 260;
+            cHubs.h = 380;
+            cHubs.tag = "Squad Hub";
+            cHubs.toUp = simulate;
+            cHubs.toRight = league;
+            cHubs.toDown = cHubs;
+            cHubs.toLeft = top25;
+            cHubs.visable = new List<HubDesign>(){myClubTab, squadTab, transferTab, officeTab, simulate, news, league, cTraining, cInbox};
+            cHubs.whatTab = new List<HubDesign>(){centralTab};
+            // HubDesign league = new HubDesign(300, 350, 260, 380, "Table");
+            league.x = 300;
+            league.y = 350;
+            league.w = 260;
+            league.h = 380;
+            league.tag = "Table";
+            league.toUp = simulate;
+            league.toRight = cTraining;
+            league.toDown = league;
+            league.toLeft = cHubs;
+            league.visable = new List<HubDesign>(){myClubTab, squadTab, transferTab, officeTab, simulate, news, cHubs, cTraining, cInbox};
+            league.whatTab = new List<HubDesign>(){centralTab};
+            // HubDesign cTraining = new HubDesign(580, 500, 290, 230, "Training");
+            cTraining.x = 580;
+            cTraining.y = 500;
+            cTraining.w = 290;
+            cTraining.h = 230;
+            cTraining.tag = "Training";
+            cTraining.toUp = news;
+            cTraining.toRight = cInbox;
+            cTraining.toDown = cTraining;
+            cTraining.toLeft = league;
+            cTraining.visable = new List<HubDesign>(){myClubTab, squadTab, transferTab, officeTab, simulate, news, cHubs, league, cInbox};
+            cTraining.whatTab = new List<HubDesign>(){centralTab};
+            // HubDesign cInbox = new HubDesign(890, 500, 290, 230, "Inbox");
+            cInbox.x = 890;
+            cInbox.y = 500;
+            cInbox.w = 290;
+            cInbox.h = 230;
+            cInbox.tag = "Inbox";
+            cInbox.toUp = news;
+            cInbox.toRight = lineUp;
+            cInbox.toDown = cInbox;
+            cInbox.toLeft = cTraining;
+            cInbox.visable = new List<HubDesign>(){myClubTab, squadTab, transferTab, officeTab, simulate, news, cHubs, league, cTraining};
+            cInbox.whatTab = new List<HubDesign>(){centralTab};
+            // HubDesign lineUp = new HubDesign(20, 140, 590, 590, "Rotational 7");
+            lineUp.x = 20;
+            lineUp.y = 140;
+            lineUp.w = 590;
+            lineUp.h = 590;
+            lineUp.tag = "Rotational 7";
+            lineUp.toUp = squadTab;
+            lineUp.toRight = squadHub;
+            lineUp.toDown = lineUp;
+            lineUp.toLeft = news;
+            lineUp.visable = new List<HubDesign>(){centralTab, transferTab, officeTab, myClubTab, squadHub, youthSquad, teamSheet, training};
+            lineUp.whatTab = new List<HubDesign>(){squadTab};
+            // HubDesign training = new HubDesign(630, 530, 550, 200, "Training");
+            training.x = 630;
+            training.y = 530;
+            training.w = 550;
+            training.h = 200;
+            training.tag = "Training";
+            training.toUp = teamSheet;
+            training.toRight = recommended;
+            training.toDown = training;
+            training.toLeft = lineUp;
+            training.visable = new List<HubDesign>(){centralTab, transferTab, officeTab, myClubTab, lineUp, squadHub, youthSquad, teamSheet};
+            training.whatTab = new List<HubDesign>(){squadTab};
+            // HubDesign squadHub = new HubDesign(630, 140, 265, 175, "Squad Hub");
+            squadHub.x = 630;
+            squadHub.y = 140;
+            squadHub.w = 265;
+            squadHub.h = 175;
+            squadHub.tag = "Squad Hub";
+            squadHub.toUp = squadTab;
+            squadHub.toRight = youthSquad;
+            squadHub.toDown = teamSheet;
+            squadHub.toLeft = lineUp;
+            squadHub.visable = new List<HubDesign>(){centralTab, transferTab, officeTab, myClubTab, lineUp, youthSquad, teamSheet, training};
+            squadHub.whatTab = new List<HubDesign>(){squadTab};
+            // HubDesign youthSquad = new HubDesign(915, 140, 265, 175, "Academy");
+            youthSquad.x = 915;
+            youthSquad.y = 140;
+            youthSquad.w = 265;
+            youthSquad.h = 175;
+            youthSquad.tag = "Academy";
+            youthSquad.toUp = squadTab;
+            youthSquad.toRight = searchPlayer;
+            youthSquad.toDown = teamSheet;
+            youthSquad.toLeft = squadHub;
+            youthSquad.visable = new List<HubDesign>(){centralTab, transferTab, officeTab, myClubTab, lineUp, squadHub, teamSheet, training};
+            youthSquad.whatTab = new List<HubDesign>(){squadTab};
+            // HubDesign teamSheet = new HubDesign(630, 335, 550, 175, "Team Rotation");
+            teamSheet.x = 630;
+            teamSheet.y = 335;
+            teamSheet.w = 550;
+            teamSheet.h = 175;
+            teamSheet.tag = "Team Rotation";
+            teamSheet.toUp = squadHub;
+            teamSheet.toRight = searchPlayer;
+            teamSheet.toDown = training;
+            teamSheet.toLeft = lineUp;
+            teamSheet.visable = new List<HubDesign>(){centralTab, transferTab, officeTab, myClubTab, lineUp, squadHub, youthSquad, training};
+            teamSheet.whatTab = new List<HubDesign>(){squadTab};
+            // HubDesign searchPlayer = new HubDesign(20, 140, 275, 285, "Search\n Players");
+            searchPlayer.x = 20;
+            searchPlayer.y = 140;
+            searchPlayer.w = 275;
+            searchPlayer.h = 285;
+            searchPlayer.tag = "Search\n Players";
+            searchPlayer.toUp = transferTab;
+            searchPlayer.toRight = transferHub;
+            searchPlayer.toDown = recommended;
+            searchPlayer.toLeft = youthSquad;
+            searchPlayer.visable = new List<HubDesign>(){squadTab, officeTab, centralTab, myClubTab, transferHub, transferHistory, finances, recommended, scouts};
+            searchPlayer.whatTab = new List<HubDesign>(){transferTab};
+            // HubDesign transferHub = new HubDesign(315, 140, 275, 285, "Transfer\n Hub");
+            transferHub.x = 315;
+            transferHub.y = 140;
+            transferHub.w = 275;
+            transferHub.h = 285;
+            transferHub.tag = "Transfer\n Hub";
+            transferHub.toUp = transferTab;
+            transferHub.toRight = transferHistory;
+            transferHub.toDown = recommended;
+            transferHub.toLeft = searchPlayer;
+            transferHub.visable = new List<HubDesign>(){squadTab, officeTab, centralTab, myClubTab, searchPlayer, transferHistory, finances, recommended, scouts};
+            transferHub.whatTab = new List<HubDesign>(){transferTab};
+            // HubDesign transferHistory = new HubDesign(610, 140, 275, 285, "Transfer\n History");
+            transferHistory.x = 610;
+            transferHistory.y = 140;
+            transferHistory.w = 275;
+            transferHistory.h = 285;
+            transferHistory.tag = "Transfer\n History";
+            transferHistory.toUp = transferTab;
+            transferHistory.toRight = finances;
+            transferHistory.toDown = recommended;
+            transferHistory.toLeft = transferHub;
+            transferHistory.visable = new List<HubDesign>(){squadTab, officeTab, centralTab, myClubTab, searchPlayer, transferHub, finances, recommended, scouts};
+            transferHistory.whatTab = new List<HubDesign>(){transferTab};
+            // HubDesign finances = new HubDesign(905, 140, 275, 285, "Financial");
+            finances.x = 905;
+            finances.y = 140;
+            finances.w = 275;
+            finances.h = 285;
+            finances.tag = "Financial";
+            finances.toUp = transferTab; 
+            finances.toRight = inbox;
+            finances.toDown = scouts;
+            finances.toLeft = transferHistory;
+            finances.visable = new List<HubDesign>(){squadTab, officeTab, centralTab, myClubTab, searchPlayer, transferHub, transferHistory, recommended, scouts};
+            finances.whatTab = new List<HubDesign>(){transferTab};
+            // HubDesign scouts = new HubDesign(905, 445, 275, 285, "Scout\n Network");
+            scouts.x = 905;
+            scouts.y = 445;
+            scouts.w = 275;
+            scouts.h = 285;
+            scouts.tag = "Scout\n Network";
+            scouts.toUp = finances;
+            scouts.toRight = contracts;
+            scouts.toDown = scouts;
+            scouts.toLeft = recommended;
+            scouts.visable = new List<HubDesign>(){squadTab, officeTab, centralTab, myClubTab, searchPlayer, transferHub, transferHistory, finances, recommended};
+            scouts.whatTab = new List<HubDesign>(){transferTab};
+            // HubDesign recommended = new HubDesign(20, 445, 865, 285, "Scouted Players");
+            recommended.x = 20;
+            recommended.y = 445;
+            recommended.w = 865;
+            recommended.h = 285;
+            recommended.tag = "Scouted Players";
+            recommended.toUp = searchPlayer;
+            recommended.toRight = scouts;
+            recommended.toDown = recommended;
+            recommended.toLeft = training;
+            recommended.visable = new List<HubDesign>(){squadTab, officeTab, centralTab, myClubTab, searchPlayer, transferHub, transferHistory, finances, scouts};
+            recommended.whatTab = new List<HubDesign>(){transferTab};
+            // HubDesign inbox = new HubDesign(20, 140, 570, 285, "Inbox");
+            inbox.x = 20;
+            inbox.y = 140;
+            inbox.w = 570;
+            inbox.h = 285;
+            inbox.tag = "Inbox";
+            inbox.toUp = officeTab;
+            inbox.toRight = vision;
+            inbox.toDown = contracts;
+            inbox.toLeft = finances;
+            inbox.visable = new List<HubDesign>(){transferTab, myClubTab, centralTab, squadTab, vision, contracts, manageStaff, browseJobs};
+            inbox.whatTab = new List<HubDesign>(){officeTab};
+            // HubDesign vision = new HubDesign(610, 140, 570, 285, "Vision and\n Expectations");
+            vision.x = 610;
+            vision.y = 140;
+            vision.w = 570;
+            vision.h = 285;
+            vision.tag = "Vision and\n Expectations";
+            vision.toUp = officeTab;
+            vision.toRight = kits;
+            vision.toDown = manageStaff;
+            vision.toLeft = inbox;
+            vision.visable = new List<HubDesign>(){transferTab, myClubTab, centralTab, squadTab, inbox, contracts, manageStaff, browseJobs};
+            vision.whatTab = new List<HubDesign>(){officeTab};
+            // HubDesign contracts = new HubDesign(20, 445, 550, 285, "Player \n Contracts");
+            contracts.x = 20;
+            contracts.y = 445;
+            contracts.w = 570;
+            contracts.h = 285;
+            contracts.tag = "Player \n Contracts";
+            contracts.toUp = inbox;
+            contracts.toRight = manageStaff;
+            contracts.toDown = contracts;
+            contracts.toLeft = scouts;
+            contracts.visable = new List<HubDesign>(){transferTab, myClubTab, centralTab, squadTab, inbox, vision, manageStaff, browseJobs};
+            contracts.whatTab = new List<HubDesign>(){officeTab};
+            // HubDesign manageStaff = new HubDesign(590, 445, 285, 285, "Staff");
+            manageStaff.x = 610;
+            manageStaff.y = 445;
+            manageStaff.w = 275;
+            manageStaff.h = 285;
+            manageStaff.tag = "Staff";
+            manageStaff.toUp = vision;
+            manageStaff.toRight = browseJobs;
+            manageStaff.toDown = manageStaff;
+            manageStaff.toLeft = contracts;
+            manageStaff.visable = new List<HubDesign>(){transferTab, myClubTab, centralTab, squadTab, inbox, vision, contracts, browseJobs};
+            manageStaff.whatTab = new List<HubDesign>(){officeTab};
+            // HubDesign browseJobs = new HubDesign(895, 445, 285, 285, "Browse \n Jobs");
+            browseJobs.x = 905;
+            browseJobs.y = 445;
+            browseJobs.w = 275;
+            browseJobs.h = 285;
+            browseJobs.tag = "Browse \n Jobs";
+            browseJobs.toUp = vision; 
+            browseJobs.toRight = kits;
+            browseJobs.toDown = browseJobs;
+            browseJobs.toLeft = manageStaff;
+            browseJobs.visable = new List<HubDesign>(){transferTab, myClubTab, centralTab, squadTab, inbox, vision, contracts, manageStaff};
+            browseJobs.whatTab = new List<HubDesign>(){officeTab};
+            // HubDesign kits = new HubDesign(20, 140, 570, 285, "Game Kits");
+            kits.x = 20;
+            kits.y = 140;
+            kits.w = 570;
+            kits.h = 285;
+            kits.tag = "Game Kits";
+            kits.toUp = myClubTab;
+            kits.toRight = arrangeFriendlies;
+            kits.toDown = trophies;
+            kits.toLeft = vision;
+            kits.visable = new List<HubDesign>(){officeTab, centralTab, squadTab, transferTab, arrangeFriendlies, trophies, otherLeagues, top25};
+            kits.whatTab = new List<HubDesign>(){myClubTab};
+            // HubDesign arrangeFriendlies = new HubDesign(610, 140, 570, 285, "Arrange Friendly");
+            arrangeFriendlies.x = 610;
+            arrangeFriendlies.y = 140;
+            arrangeFriendlies.w = 570;
+            arrangeFriendlies.h = 285;
+            arrangeFriendlies.tag = "Arrange Friendly";
+            arrangeFriendlies.toUp = myClubTab;
+            arrangeFriendlies.toRight = simulate;
+            arrangeFriendlies.toDown = otherLeagues;
+            arrangeFriendlies.toLeft = kits;
+            arrangeFriendlies.visable = new List<HubDesign>(){officeTab, centralTab, squadTab, transferTab, kits, trophies, otherLeagues, top25};
+            arrangeFriendlies.whatTab = new List<HubDesign>(){myClubTab};
+            // HubDesign trophies = new HubDesign(20, 445, 320, 285, "Club History");
+            trophies.x = 20;
+            trophies.y = 445;
+            trophies.w = 430;
+            trophies.h = 285;
+            trophies.tag = "Club History";
+            trophies.toUp = kits;
+            trophies.toRight = otherLeagues;
+            trophies.toDown = trophies;
+            trophies.toLeft = browseJobs;
+            trophies.visable = new List<HubDesign>(){officeTab, centralTab, squadTab, transferTab, kits, arrangeFriendlies, otherLeagues, top25};
+            trophies.whatTab = new List<HubDesign>(){myClubTab};
+            // HubDesign otherLeagues = new HubDesign(360, 445, 400, 285, "Other Leagues");
+            otherLeagues.x = 470;
+            otherLeagues.y = 445;
+            otherLeagues.w = 260;
+            otherLeagues.h = 285;
+            otherLeagues.tag = "Other \n Leagues";
+            otherLeagues.toUp = kits;
+            otherLeagues.toRight = top25;
+            otherLeagues.toDown = otherLeagues;
+            otherLeagues.toLeft = trophies;
+            otherLeagues.visable = new List<HubDesign>(){officeTab, centralTab, squadTab, transferTab, kits, arrangeFriendlies, trophies, top25};
+            otherLeagues.whatTab = new List<HubDesign>(){myClubTab};
+            // HubDesign top25 = new HubDesign(780, 445, 400, 285, "All Statistics");
+            top25.x = 750;
+            top25.y = 445;
+            top25.w = 430;
+            top25.h = 285;
+            top25.tag = "All Statistics";
+            top25.toUp = arrangeFriendlies;
+            top25.toRight = cHubs;
+            top25.toDown = top25;
+            top25.toLeft = otherLeagues;
+            top25.visable = new List<HubDesign>(){officeTab, centralTab, squadTab, transferTab, kits, arrangeFriendlies, trophies, otherLeagues};
+            top25.whatTab = new List<HubDesign>(){myClubTab};
         }
     }
 }
