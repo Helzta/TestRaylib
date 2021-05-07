@@ -7,123 +7,79 @@ namespace TryRL
 {
     public class HubDesign
     {
-        static List<HubDesign> designData = new List<HubDesign>();
-        public bool isHeader;
-        public bool scrlLeft;
-        public bool scrlMid;
-        public bool scrlRight;
-        public int scrlAmnt;
-        public int sX;
-        public int sY;
-        public int sW;
-        public int sH;
-        public string name;
-        public bool current {get; set;}
-        public bool isShowing;
-        public HubDesign(int sX, int sY, int sW, int sH, string name, bool scrlLeft = false, int scrlAmnt = 0, bool current = false, bool isHeader = false, bool isShowing = false, bool scrlMid = false, bool scrlRight = false)
-        {
-            designData.Add(this);
-            this.scrlLeft = scrlLeft;
-            this.scrlMid = scrlMid;
-            this.scrlRight = scrlRight;
-            this.sX = sX;
-            this.sY = sY;
-            this.sW = sW;
-            this.sH = sH;
-            this.scrlAmnt = scrlAmnt;
-            this.name = name;
-            this.current = current;
-            this.isShowing = isShowing;
-            this.isHeader = isHeader;
-        }
-        public void DrawGameHub()
-        {
-            {
-                // Big box
-                // Raylib.DrawRectangle(sX -10, sY -10, sW +20, sH +20, Color.SKYBLUE);
-                // Raylib.DrawRectangleLines(sX -10, sY -10, sW +20, sH +20, Color.BLACK);
-                // Raylib.DrawText(name, sX, sY, 50, Color.ORANGE);
-                
-                // Little box
-                // Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
-                // Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
-                // Raylib.DrawText(name, sX + 15, sY + 15, 30, Color.ORANGE);
+        // static List<HubDesign> rayStuff = new List<HubDesign>();
+        public int x {get; set;}
+        public int y {get; set;}
+        public int w {get; set;}
+        public int h {get; set;}
+        public string tag {get; set;}
+        public bool header = false;
+        public HubDesign toUp {get; set;}
+        public HubDesign toDown {get; set;}
+        public HubDesign toRight {get; set;}
+        public HubDesign toLeft {get; set;}
+        public List<HubDesign> visable;
+        public List<HubDesign> whatTab;
 
-                // 2 scroll
-                // Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-                // Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
+        public Action action;
 
-                // 3 scroll
-                // Raylib.DrawCircle((sW / 2) + sX, sY + sH - 30, 15, Color.BLUE);
-                // Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-                // Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-            }
-            if (current == true && isHeader == true)
-            {
-                Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
-                Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
-                Raylib.DrawText(name, sX + 5, sY + 10, 30, Color.ORANGE);
-                Raylib.DrawLineEx(new Vector2(sX + 5, sY + sH - 10), new Vector2(sX + sW - 5, sY + sH - 10), 5, Color.ORANGE);
-            }
-            else if(isHeader == true)
-            {
-                Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
-                Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
-                Raylib.DrawText(name, sX + 5, sY + 10, 30, Color.ORANGE);
-            }
-            else if (current == true)
-            {
-                Raylib.DrawRectangle(sX -10, sY -10, sW +20, sH +20, Color.SKYBLUE);
-                Raylib.DrawRectangleLines(sX -10, sY -10, sW +20, sH +20, Color.BLACK);
-                Raylib.DrawText(name, sX, sY, 50, Color.ORANGE);
-            }
-            else if(isShowing == true)
-            {
-                Raylib.DrawRectangle(sX, sY, sW, sH, Color.SKYBLUE);
-                Raylib.DrawRectangleLines(sX, sY, sW, sH, Color.BLACK);
-                Raylib.DrawText(name, sX + 15, sY + 15, 30, Color.ORANGE);
-            }
-            if (scrlRight == true && isShowing == true)
-            {
-                if (scrlAmnt == 2)
-                {
-                    Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.DARKBLUE);
-                    Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-                }
-                else
-                {
-                    Raylib.DrawCircle((sW / 2) + sX, sY + sH - 30, 15, Color.BLUE);
-                    Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-                    Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.DARKBLUE);
-                }
-            }
-            else if (scrlMid == true && isShowing == true)
-            {
-                Raylib.DrawCircle((sW / 2) + sX, sY + sH - 30, 15, Color.DARKBLUE);
-                Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-                Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-            }
-            else if (scrlLeft == true && isShowing == true)
-            {
-                if (scrlAmnt == 2)
-                {
-                    Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-                    Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.DARKBLUE);
-                }
-                else
-                {
-                    Raylib.DrawCircle((sW / 2) + sX, sY + sH - 30, 15, Color.BLUE);
-                    Raylib.DrawCircle((sW / 2) + sX - ((sW / 6)), sY + sH - 30, 15, Color.DARKBLUE);
-                    Raylib.DrawCircle((sW / 2) + sX + ((sW / 6)), sY + sH - 30, 15, Color.BLUE);
-                }
-            }
-        }
-        public static void DrawGameHubs()
+        // public HubDesign(int x, int y, int w, int h, string tag, bool header = false)
+        // {
+        //     rayStuff.Add(this);
+        //     this.x = x;
+        //     this.y = y;
+        //     this.w = w;
+        //     this.h = h;
+        //     this.tag = tag;
+        //     this.header = header;
+        // }
+        public void DrawBox()
         {
-            foreach (HubDesign gD in designData)
+            if(header == true)
             {
-                gD.DrawGameHub();
+                Raylib.DrawRectangleGradientEx(new Rectangle(x, y, w, h), Color.VIOLET, Color.DARKPURPLE, Color.DARKPURPLE , Color.DARKPURPLE);
+                Raylib.DrawRectangleLines(x, y, w, h, Color.BLACK);
+                Raylib.DrawText(tag, x + 10, y + 10, 30, Color.YELLOW);
+            }
+            else
+            {
+                Raylib.DrawRectangleGradientEx(new Rectangle(x, y, w, h), Color.BLUE, Color.DARKBLUE, Color.DARKBLUE , Color.DARKBLUE);
+                Raylib.DrawRectangleLines(x, y, w, h, Color.BLACK);
+                Raylib.DrawText(tag, x + 15, y + 15, 30, Color.ORANGE);
+            }
+            {
+                // smoll
+                // Raylib.DrawRectangle(x, y, w, h, Color.SKYBLUE);
+                // Raylib.DrawRectangleLines(x, y, w, h, Color.BLACK);
+                // Raylib.DrawText(tag, x + 15, y + 15, 30, Color.ORANGE);
+
+                // bick
+                // Raylib.DrawRectangle(x -10, y -10, w +20, h +20, Color.SKYBLUE);
+                // Raylib.DrawRectangleLines(x -10, y -10, w +20, h +20, Color.BLACK);
+                // Raylib.DrawText(tag, x, y, 50, Color.ORANGE);
             }
         }
+        public void DrawTab()
+        {
+            Raylib.DrawRectangleGradientEx(new Rectangle(x, y, w, h), Color.MAGENTA, Color.VIOLET, Color.DARKPURPLE , Color.VIOLET);
+            Raylib.DrawRectangleLines(x, y, w, h, Color.BLACK);
+            Raylib.DrawText(tag, x + 10, y + 10, 30, Color.YELLOW);
+        }
+        static public void currentBox(HubDesign current)
+        {
+            if(current.header == true)
+            {
+                Raylib.DrawRectangleGradientEx(new Rectangle(current.x, current.y, current.w, current.h), Color.MAGENTA, Color.VIOLET, Color.DARKPURPLE , Color.VIOLET);
+                Raylib.DrawRectangleLines(current.x, current.y, current.w, current.h, Color.BLACK);
+                Raylib.DrawText(current.tag, current.x + 10, current.y + 10, 30, Color.YELLOW);
+                Raylib.DrawLineEx(new Vector2(current.x + 10, current.y + current.h - 10), new Vector2(current.x + current.w - 5, current.y + current.h - 10), 5, Color.YELLOW);
+            }
+            else
+            {
+                Raylib.DrawRectangleGradientEx(new Rectangle(current.x -10, current.y -10, current.w +20, current.h +20), Color.SKYBLUE, Color.BLUE, Color.DARKBLUE , Color.BLUE);
+                Raylib.DrawRectangleLines(current.x -10, current.y -10, current.w +20, current.h +20, Color.BLACK);
+                Raylib.DrawText(current.tag, current.x, current.y, 45, Color.ORANGE);
+            }
+        }   
     }
 }
